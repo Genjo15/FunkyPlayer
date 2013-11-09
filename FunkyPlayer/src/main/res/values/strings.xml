@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Funky Player</string>
+    <string name="image_content_description">Menu image</string>
 </resources>
