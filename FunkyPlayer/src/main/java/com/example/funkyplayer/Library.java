@@ -1,19 +1,17 @@
 package com.example.funkyplayer;
 
 import android.os.Environment;
-import android.widget.Toast;
-
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 /**
  * Created by Anthony on 10/11/13.
  */
-public class Library
+public class Library implements Serializable
 {
-    private final String MEDIA_PATH = "/sdcard/MusicTest/";
-    private List<Song> library;
+    private ArrayList<Song> library;
 
 
     /***************\
@@ -22,6 +20,7 @@ public class Library
 
     public Library()
     {
+
         library = new ArrayList<Song>();
         FillLibrary();
     }
@@ -48,4 +47,30 @@ public class Library
                 library.add(new Song(listFiles[i].getPath()));
         }
     }
+
+    /**********************\
+     * Get all songs name *
+    \**********************/
+
+    public ArrayList<String> GetSongsName ()
+    {
+        ArrayList<String> songsName = new ArrayList<String>();
+
+        for(Song element : library)
+        {
+            songsName.add(new String(element.GetName()));
+        }
+        Collections.sort(songsName);
+        songsName.add(0, new String("~ SHUFFLE ~"));
+
+        return songsName;
+    }
+
+    /*********************\
+     * Getters / setters *
+    \*********************/
+
+    public ArrayList<Song> GetLibrary(){return library;}
+    public void SetSongs(ArrayList<Song> list){library = list;}
+
 }

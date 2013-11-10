@@ -4,11 +4,16 @@ import android.annotation.TargetApi;
 import android.media.MediaMetadataRetriever;
 import android.os.Build;
 
-public class Song
+import java.io.Serializable;
+
+public class Song implements Serializable
 {
     private String path;
     private String name;
 
+    /***************\
+     * Constructor *
+    \***************/
 
     public Song(String path)
     {
@@ -16,6 +21,10 @@ public class Song
         RetrieveMetadata();
 
     }
+
+    /*********************\
+     * Retrieve metadata *
+    \*********************/
 
     @TargetApi(Build.VERSION_CODES.GINGERBREAD_MR1)
     private void RetrieveMetadata()
@@ -30,5 +39,15 @@ public class Song
         catch (Exception e) {
         }
     }
+
+    /***********\
+     * Getters *
+    \***********/
+
+    public String GetName(){return name;}
+    public String GetPath(){return path;}
+
+    public void SetName(String name){this.name = name;}
+    public void SetPath(String path){this.path = path;}
 }
 

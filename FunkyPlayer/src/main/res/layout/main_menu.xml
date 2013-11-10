@@ -15,12 +15,12 @@
         android:contentDescription="@string/image_content_description" />
 
     <Button
-    android:id="@+id/browse_artists"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginTop="60dp"
-    android:text="@string/browse_artists" />
+        android:id="@+id/browse_artists"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:text="@string/browse_artists" />
 
     <Button
         android:id="@+id/browse_albums"
@@ -37,48 +37,5 @@
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
         android:text="@string/browse_songs" />
-
-    <!--
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:paddingTop="0dp"
-            android:text="@string/email"
-            android:textSize="15sp"
-            android:textColor="#000000" />
-
-        <EditText
-            android:id="@+id/user_email"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:layout_gravity="center" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:paddingTop="0dp"
-            android:textSize="15sp"
-            android:text="@string/password"
-            android:textColor="#000000" />
-
-        <EditText
-            android:id="@+id/user_password"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:inputType="textPassword" />
-
-        <Button
-            android:id="@+id/connect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="0dp"
-            android:text="@string/connect" />-->
-
-
 
 </LinearLayout>
