@@ -8,10 +8,16 @@ import android.widget.Button;
 
 public class MainMenu extends Activity
 {
+    Library musicalLibrary;
+
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
+
+        // Create library
+        musicalLibrary = new Library();
+
 
         // Set references to buttons
         final Button bySongsButton = (Button)findViewById(R.id.browse_songs);
