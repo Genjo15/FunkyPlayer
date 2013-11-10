@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 
 /**
  * Created by Anthony on 10/11/13.
@@ -46,6 +47,30 @@ public class Library implements Serializable
             else if(listFiles[i].getPath().endsWith(".mp3") || listFiles[i].getPath().endsWith(".MP3"))
                 library.add(new Song(listFiles[i].getPath()));
         }
+    }
+
+    /***********************\
+     * Get all albums name *
+    \***********************/
+
+    public ArrayList<String> GetAlbumsName ()
+    {
+        ArrayList<String> albumsName = new ArrayList<String>();
+
+        for(Song element : library)
+        {
+           albumsName.add(new String(element.GetAlbum()));
+        }
+
+        // Remove duplicates
+        HashSet hashsetTmp = new HashSet();
+        hashsetTmp.addAll(albumsName);
+        albumsName.clear();
+        albumsName.addAll(hashsetTmp);
+
+        Collections.sort(albumsName);
+
+        return albumsName;
     }
 
     /**********************\

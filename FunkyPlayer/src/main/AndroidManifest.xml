@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".BySongs" />
+        <activity android:name=".ByAlbums" />
     </application>
 
 </manifest>
