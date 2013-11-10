@@ -12,13 +12,13 @@ public class BySongs extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.by_songs);
+        setContentView(R.layout.list_view);
 
         // Get Library from intent
         Library trackList = (Library)getIntent().getSerializableExtra("library");
 
         // Set references to listView
-        listViewBySongs = (ListView)findViewById(R.id.listview_by_songs);
+        listViewBySongs = (ListView)findViewById(R.id.listview);
 
         // Set ListView adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, trackList.GetSongsName());
