@@ -12,5 +12,6 @@ public class BySongs extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.by_songs);
+
     }
 }
