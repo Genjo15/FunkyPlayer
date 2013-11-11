@@ -10,6 +10,7 @@ public class Song implements Serializable
 {
     private String path;
     private String name;
+    private String artist;
     private String album;
 
     /***************\
@@ -36,6 +37,7 @@ public class Song implements Serializable
         try
         {
             name = MMR.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE).toString();
+            artist = MMR.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST).toString();
             album = MMR.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM).toString();
         }
         catch (Exception e) {
@@ -48,6 +50,7 @@ public class Song implements Serializable
 
     public String GetName(){return name;}
     public String GetPath(){return path;}
+    public String GetArtist(){return artist;}
     public String GetAlbum(){return album;}
 
     public void SetName(String name){this.name = name;}

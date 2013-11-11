@@ -24,13 +24,36 @@ public class MainMenu extends Activity
         musicalLibrary.FillLibrary();
 
         // Set references to buttons
-        final Button bySongsButton = (Button)findViewById(R.id.browse_songs);
+        final Button byArtistsButton = (Button)findViewById(R.id.browse_artists);
         final Button byAlbumsButton = (Button)findViewById(R.id.browse_albums);
+        final Button bySongsButton = (Button)findViewById(R.id.browse_songs);
 
 
         /****************************************************\
-         * Event for clicking the "Browse by Albums" button *
+         * Event for clicking the "Browse by Artists" button *
          \***************************************************/
+
+        byArtistsButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                // Prepare bundle to sent
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("library", musicalLibrary);
+
+                // Create and prepare intent
+                Intent intent = new Intent(MainMenu.this, ByArtists.class);
+                intent.putExtras(bundle);
+
+                // Switch activity
+                startActivity(intent);
+            }
+        });
+
+        /****************************************************\
+         * Event for clicking the "Browse by Albums" button *
+        \***************************************************/
 
         byAlbumsButton.setOnClickListener(new View.OnClickListener()
         {

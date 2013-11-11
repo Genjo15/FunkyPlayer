@@ -47,6 +47,47 @@ public class Library implements Serializable
         }
     }
 
+    /************************\
+     * Get all artists name *
+    \************************/
+
+    public ArrayList<String> GetArtistsName ()
+    {
+        ArrayList<String> artistsName = new ArrayList<String>();
+
+        for(Song element : library)
+        {
+            artistsName.add(new String(element.GetArtist()));
+        }
+
+        // Remove duplicates
+        HashSet hashsetTmp = new HashSet();
+        hashsetTmp.addAll(artistsName);
+        artistsName.clear();
+        artistsName.addAll(hashsetTmp);
+
+        Collections.sort(artistsName);
+
+        return artistsName;
+    }
+
+    /************************\
+     * Get albums of artist *
+     \***********************/
+
+    public ArrayList<Song> GetAlbumsOfArtists(String artist)
+    {
+        ArrayList<Song> filteredTrackList = new ArrayList<Song>();
+
+        for(Song element : library)
+        {
+            if(element.GetArtist().equalsIgnoreCase(artist))
+                filteredTrackList.add(element);
+        }
+
+        return filteredTrackList;
+    }
+
     /***********************\
      * Get all albums name *
     \***********************/
