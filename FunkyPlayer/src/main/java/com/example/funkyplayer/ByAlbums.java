@@ -1,13 +1,18 @@
 package com.example.funkyplayer;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class ByAlbums extends Activity
 {
     ListView listViewByAlbums;
+    Library trackList;
 
     public void onCreate(Bundle savedInstanceState)
     {
@@ -15,7 +20,7 @@ public class ByAlbums extends Activity
         setContentView(R.layout.list_view);
 
         // Get Library from intent
-        Library trackList = (Library)getIntent().getSerializableExtra("library");
+        trackList = (Library)getIntent().getSerializableExtra("library");
 
         // Set references to listView
         listViewByAlbums = (ListView)findViewById(R.id.listview);
@@ -23,5 +28,42 @@ public class ByAlbums extends Activity
         // Set ListView adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, trackList.GetAlbumsName());
         listViewByAlbums.setAdapter(adapter);
+
+        // ListView Item Click Listener
+        listViewByAlbums.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+                // ListView Clicked item index
+                int itemPosition = position;
+
+                // ListView Clicked item value
+                String  itemValue = (String) listViewByAlbums.getItemAtPosition(position);
+
+                // Retrieve songs of selected album
+                Library newTrackList = new Library();
+                newTrackList.SetLibrary(trackList.GetSongsOfAlbum(itemValue));
+
+                // Prepare bundle to sent
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("library", newTrackList);
+
+                // Create and prepare intent
+                Intent intent = new Intent(ByAlbums.this, BySongs.class);
+                intent.putExtras(bundle);
+
+                // Switch activity
+                startActivity(intent);
+
+                // Show Alert test
+                //Toast.makeText(getApplicationContext(),
+                //        "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
+                //        .show();
+
+            }
+
+        });
     }
 }

@@ -21,16 +21,14 @@ public class Library implements Serializable
 
     public Library()
     {
-
         library = new ArrayList<Song>();
-        FillLibrary();
     }
 
     /*********************************************\
      * Fill the library from the internal memory *
     \*********************************************/
 
-    private void FillLibrary()
+    public void FillLibrary()
     {
         File root = new File(Environment.getExternalStorageDirectory().toString() + "/MusicTest/");
         AnalyzeDirectory(root);
@@ -74,6 +72,23 @@ public class Library implements Serializable
     }
 
     /**********************\
+     * Get songs of album *
+    \**********************/
+
+    public ArrayList<Song> GetSongsOfAlbum(String album)
+    {
+        ArrayList<Song> filteredTrackList = new ArrayList<Song>();
+
+        for(Song element : library)
+        {
+            if(element.GetAlbum().equalsIgnoreCase(album))
+                filteredTrackList.add(element);
+        }
+
+        return filteredTrackList;
+    }
+
+    /**********************\
      * Get all songs name *
     \**********************/
 
@@ -96,6 +111,6 @@ public class Library implements Serializable
     \*********************/
 
     public ArrayList<Song> GetLibrary(){return library;}
-    public void SetSongs(ArrayList<Song> list){library = list;}
+    public void SetLibrary(ArrayList<Song> list){library = list;}
 
 }

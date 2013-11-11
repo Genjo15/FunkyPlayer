@@ -21,6 +21,7 @@ public class MainMenu extends Activity
 
         // Create library
         musicalLibrary = new Library();
+        musicalLibrary.FillLibrary();
 
         // Set references to buttons
         final Button bySongsButton = (Button)findViewById(R.id.browse_songs);
