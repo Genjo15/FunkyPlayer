@@ -1,20 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <Button
-        android:text="PLAY_test"
-        android:textSize="15pt"
+
+    <TextView
+        android:id="@+id/song"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="30sp"
         android:textStyle="bold"
-        android:id="@+id/ButtonPlayStop"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
+        android:maxLines="1"
+        android:scrollHorizontally="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit ="marquee_forever"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+
+    <TextView
+        android:id="@+id/artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/album"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="40dp"
+        android:textSize="20sp"
+        android:textStyle="italic"/>
+
+    <ImageView
+        android:id="@+id/album_art"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"/>
 
     <SeekBar
-        android:id="@+id/SeekBar01"
+        android:id="@+id/seekbar"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:layout_below="@id/ButtonPlayStop"/>
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginLeft="22dp"/>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="25dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/button_repeat"
+            android:src="@drawable/repeat_disabled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="35dp"
+            android:background="@null"/>
+
+        <ImageButton
+            android:id="@+id/button_previous"
+            android:src="@drawable/previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="7dp"
+            android:background="@null"/>
+
+        <ImageButton
+            android:id="@+id/button_play_pause"
+            android:src="@drawable/pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="7dp"
+            android:layout_marginLeft="7dp"
+            android:background="@null"/>
+
+        <ImageButton
+            android:id="@+id/button_next"
+            android:src="@drawable/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:background="@null"/>
+
+        <ImageButton
+            android:id="@+id/button_random"
+            android:src="@drawable/random_disabled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:background="@null"/>
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
