@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 public class ByAlbums extends Activity
 {
-    ListView listViewByAlbums;
-    Library trackList;
+    private ListView listViewByAlbums;
+    private Library trackList;
 
     public void onCreate(Bundle savedInstanceState)
     {

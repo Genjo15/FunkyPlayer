@@ -21,7 +21,14 @@ public class Song implements Serializable
     {
         this.path = path;
         RetrieveMetadata();
+    }
 
+    public Song()
+    {
+        path = new String();
+        name = new String();
+        artist = new String();
+        album = new String();
     }
 
     /*********************\
@@ -44,9 +51,9 @@ public class Song implements Serializable
         }
     }
 
-    /***********\
-     * Getters *
-    \***********/
+    /*********************\
+     * Getters / setters *
+    \*********************/
 
     public String GetName(){return name;}
     public String GetPath(){return path;}
@@ -55,5 +62,15 @@ public class Song implements Serializable
 
     public void SetName(String name){this.name = name;}
     public void SetPath(String path){this.path = path;}
+    public void SetArtist(String artist){this.artist = artist;}
+    public void SetAlbum(String album){this.album = album;}
+
+    public void CopyFrom(Song s)
+    {
+        SetPath(s.GetPath());
+        SetName(s.GetName());
+        SetArtist(s.GetArtist());
+        SetAlbum(s.GetAlbum());
+    }
 }
 

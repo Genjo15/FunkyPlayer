@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 public class BySongs extends Activity
 {
-    ListView listViewBySongs;
-    Library trackList;
+    private ListView listViewBySongs;
+    private Library trackList;
 
     public void onCreate(Bundle savedInstanceState)
     {
@@ -47,6 +47,7 @@ public class BySongs extends Activity
                 // Create and prepare intent
                 Intent intent = new Intent(BySongs.this, Launcher.class);
                 intent.putExtras(bundle);
+                intent.putExtra("song_selected", itemValue);
 
                 // Switch activity
                 startActivity(intent);

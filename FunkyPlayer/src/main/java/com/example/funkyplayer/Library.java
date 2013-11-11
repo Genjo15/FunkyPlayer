@@ -147,6 +147,23 @@ public class Library implements Serializable
         return songsName;
     }
 
+    /********************\
+     * Get song to play *
+    \********************/
+
+    public Song GetSong(String songName)
+    {
+        Song song2Play = new Song();
+
+        for(Song element : library)
+        {
+            if(element.GetName().equalsIgnoreCase(songName))
+                song2Play.CopyFrom(element);
+        }
+
+        return song2Play;
+    }
+
     /*********************\
      * Getters / setters *
     \*********************/

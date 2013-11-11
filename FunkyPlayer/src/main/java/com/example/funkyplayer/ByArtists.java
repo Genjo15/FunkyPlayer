@@ -14,8 +14,8 @@ import android.widget.Toast;
  */
 public class ByArtists extends Activity
 {
-    ListView listViewByArtists;
-    Library trackList;
+    private ListView listViewByArtists;
+    private Library trackList;
 
     public void onCreate(Bundle savedInstanceState)
     {
