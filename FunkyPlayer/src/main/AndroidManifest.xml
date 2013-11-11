@@ -20,6 +20,7 @@
         <activity android:name=".BySongs" />
         <activity android:name=".ByAlbums" />
         <activity android:name=".ByArtists" />
+        <activity android:name=".Launcher" />
     </application>
 
 </manifest>
