@@ -66,6 +66,7 @@ public class Song implements Serializable
     public String GetPath(){return path;}
     public String GetArtist(){return artist;}
     public String GetAlbum(){return album;}
+    public Song GetSong(){return this;}
     //public byte[] GetImage(){return image;}
 
     public void SetName(String name){this.name = name;}

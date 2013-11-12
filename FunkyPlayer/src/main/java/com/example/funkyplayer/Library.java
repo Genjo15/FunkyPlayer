@@ -153,15 +153,28 @@ public class Library implements Serializable
 
     public Song GetSong(String songName)
     {
-        Song song2Play = new Song();
+        //Song song2Play = new Song();
+//
+        //for(Song element : library)
+        //{
+        //    if(element.GetName().equalsIgnoreCase(songName))
+        //        song2Play.CopyFrom(element);
+        //}
+//
+        //return song2Play;
 
-        for(Song element : library)
+        int i = 0;
+        boolean loop = true;
+
+        while(i<(library.size()-1) && loop)
         {
-            if(element.GetName().equalsIgnoreCase(songName))
-                song2Play.CopyFrom(element);
+            if(library.get(i).GetName().equalsIgnoreCase(songName))
+                loop = false;
+            else
+                i++;
         }
 
-        return song2Play;
+        return library.get(i);
     }
 
     /*********************\

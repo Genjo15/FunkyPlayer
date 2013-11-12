@@ -30,7 +30,7 @@ public class Launcher extends Activity
     private Library trackList;
     private String musicPlayedName;
     private static MediaPlayer mediaPlayer;
-    private Song song2Play;
+    //private Song song2Play;
     private Boolean random;
     private Boolean repeat;
 
@@ -164,7 +164,7 @@ public class Launcher extends Activity
     private void LaunchSong()
     {
         // Get song to play
-        song2Play = trackList.GetSong(musicPlayedName);
+        //song2Play = trackList.GetSong(musicPlayedName);
 
         // Create MediaPlayer object (if an instance is running kill it)
         if (mediaPlayer != null) {
@@ -172,28 +172,40 @@ public class Launcher extends Activity
             mediaPlayer.release();
             mediaPlayer = null;
         }
-        mediaPlayer = MediaPlayer.create(this, Uri.parse(song2Play.GetPath()));
+        mediaPlayer = MediaPlayer.create(this, Uri.parse(trackList.GetSong(musicPlayedName).GetPath()));
+
+        // Listener for notifying when a song ends
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer)
+            {
+               Toast.makeText(getApplicationContext(),
+                       "OK", Toast.LENGTH_LONG)
+                       .show();
+            }
+        });
+
         mediaPlayer.start();
         StartPlayProgressUpdater();
 
         // Set song name
-        textViewSong.setText(song2Play.GetName());
+        textViewSong.setText(trackList.GetSong(musicPlayedName).GetName());
 
         // Set artist name
-        textViewArtist.setText(song2Play.GetArtist());
+        textViewArtist.setText(trackList.GetSong(musicPlayedName).GetArtist());
 
         // Set album name
-        textViewAlbum.setText(song2Play.GetAlbum());
+        textViewAlbum.setText(trackList.GetSong(musicPlayedName).GetAlbum());
 
         // Set image art
         MediaMetadataRetriever MMR= new MediaMetadataRetriever();
-        MMR.setDataSource(song2Play.GetPath());
+        MMR.setDataSource(trackList.GetSong(musicPlayedName).GetPath());
         byte[] art;
         art = MMR.getEmbeddedPicture();
         Bitmap songImage = BitmapFactory.decodeByteArray(art, 0, art.length);
         songCoverArt.setImageBitmap(songImage);
 
-        // Set seekbar
+        // Set seekbarrrrr
         seekbar.setMax(mediaPlayer.getDuration());
     }
 
