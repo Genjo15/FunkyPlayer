@@ -37,8 +37,6 @@ public class ByArtists extends Activity
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
             {
-                // ListView Clicked item index
-                int itemPosition = position;
 
                 // ListView Clicked item value
                 String  itemValue = (String) listViewByArtists.getItemAtPosition(position);

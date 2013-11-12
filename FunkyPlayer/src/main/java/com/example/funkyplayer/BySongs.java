@@ -34,9 +34,6 @@ public class BySongs extends Activity
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
             {
-                // ListView Clicked item index
-                int itemPosition = position;
-
                 // ListView Clicked item value
                 String  itemValue = (String) listViewBySongs.getItemAtPosition(position);
 

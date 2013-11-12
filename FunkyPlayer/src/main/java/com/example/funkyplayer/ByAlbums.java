@@ -36,9 +36,6 @@ public class ByAlbums extends Activity
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                // ListView Clicked item index
-                int itemPosition = position;
-
                 // ListView Clicked item value
                 String  itemValue = (String) listViewByAlbums.getItemAtPosition(position);
 

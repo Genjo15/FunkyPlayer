@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 
-/**
- * Created by Anthony on 10/11/13.
- */
 public class Library implements Serializable
 {
     private ArrayList<Song> library;
@@ -181,7 +178,7 @@ public class Library implements Serializable
      * Getters / setters *
     \*********************/
 
-    public ArrayList<Song> GetLibrary(){return library;}
+    //public ArrayList<Song> GetLibrary(){return library;}
     public void SetLibrary(ArrayList<Song> list){library = list;}
 
 }
