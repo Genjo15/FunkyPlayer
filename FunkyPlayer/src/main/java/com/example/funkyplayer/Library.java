@@ -138,15 +138,15 @@ public class Library implements Serializable
         {
             songsName.add(new String(element.GetName()));
         }
-        Collections.sort(songsName);
+        //Collections.sort(songsName);
         songsName.add(0, new String("~ SHUFFLE ~"));
 
         return songsName;
     }
 
-    /********************\
-     * Get song to play *
-    \********************/
+    /***********************************\
+     * Get song to play and vice versa *
+    \***********************************/
 
     public Song GetSong(String songName)
     {
@@ -174,11 +174,26 @@ public class Library implements Serializable
         return library.get(i);
     }
 
+    public int IndexOfSong(Song song)
+    {
+        int i = 0;
+        boolean loop = true;
+
+        while(i<(library.size()-1) && loop)
+        {
+            if(library.get(i).GetName().equalsIgnoreCase(song.GetName()))
+                loop = false;
+            else
+                i++;
+        }
+        return i;
+    }
+
     /*********************\
      * Getters / setters *
     \*********************/
 
-    //public ArrayList<Song> GetLibrary(){return library;}
+    public ArrayList<Song> GetLibrary(){return library;}
     public void SetLibrary(ArrayList<Song> list){library = list;}
 
 }

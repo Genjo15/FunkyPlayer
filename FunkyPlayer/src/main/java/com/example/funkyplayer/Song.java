@@ -12,6 +12,7 @@ public class Song implements Serializable
     private String name;
     private String artist;
     private String album;
+    private Boolean hasBeenPlayed;
 
     /***************\
      * Constructor *
@@ -20,6 +21,7 @@ public class Song implements Serializable
     public Song(String path)
     {
         this.path = path;
+        hasBeenPlayed = false;
         RetrieveMetadata();
     }
 
@@ -51,7 +53,10 @@ public class Song implements Serializable
     public String GetPath(){return path;}
     public String GetArtist(){return artist;}
     public String GetAlbum(){return album;}
+    public Boolean GetHasBeenPlayed(){return hasBeenPlayed;}
     //public byte[] GetImage(){return image;}
+
+    public void SetHasBeenPlayed(Boolean b){this.hasBeenPlayed = b;}
 
    //public void SetName(String name){this.name = name;}
    //public void SetPath(String path){this.path = path;}

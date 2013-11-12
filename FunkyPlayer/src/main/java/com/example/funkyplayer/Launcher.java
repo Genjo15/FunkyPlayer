@@ -21,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.net.URI;
+import java.util.Arrays;
+import java.util.Collections;
 
 
 public class Launcher extends Activity
@@ -28,13 +30,14 @@ public class Launcher extends Activity
     private final Handler handler = new Handler();
 
     private Library trackList;
-    private String musicPlayedName;
+    private String music2Play;
     private static MediaPlayer mediaPlayer;
-    //private Song song2Play;
     private Boolean random;
     private Boolean repeat;
+    private int idx;
 
     private ImageButton buttonPlayPause;
+    private ImageButton buttonNextSong;
     private ImageButton buttonRandom;
     private ImageButton buttonRepeat;
     private ImageView songCoverArt;
@@ -55,10 +58,12 @@ public class Launcher extends Activity
         // Get Library from intent + selected song name
         Intent intent = getIntent();
         trackList = (Library)intent.getSerializableExtra("library");
-        musicPlayedName = intent.getStringExtra("song_selected");
+        Collections.sort(trackList.GetSongsName());
+        music2Play = intent.getStringExtra("song_selected");
 
         // Set references to widgets
         buttonPlayPause = (ImageButton) findViewById(R.id.button_play_pause);
+        buttonNextSong = (ImageButton) findViewById(R.id.button_next);
         buttonRandom = (ImageButton)findViewById(R.id.button_random);
         buttonRepeat = (ImageButton)findViewById(R.id.button_repeat);
         songCoverArt = (ImageView) findViewById(R.id.album_art);
@@ -68,7 +73,8 @@ public class Launcher extends Activity
         seekbar = (SeekBar)findViewById(R.id.seekbar);
 
         // Launch song
-        LaunchSong();
+        LaunchSong(music2Play);
+        idx = trackList.IndexOfSong(trackList.GetSong(music2Play));
 
 
         /*******************************************\
@@ -91,6 +97,23 @@ public class Launcher extends Activity
                     StartPlayProgressUpdater();
                     buttonPlayPause.setImageResource(R.drawable.pause);
                 }
+            }
+        });
+
+        /******************************************\
+         * Set event handler for next song button *
+        \******************************************/
+
+        buttonNextSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                idx++;
+                if (repeat) idx --;
+                if (idx > trackList.GetLibrary().size()-1)
+                    idx=0;
+
+                LaunchSong(trackList.GetLibrary().get(idx).GetName());
             }
         });
 
@@ -161,10 +184,10 @@ public class Launcher extends Activity
     \***************/
 
     @TargetApi(Build.VERSION_CODES.GINGERBREAD_MR1)
-    private void LaunchSong()
+    private void LaunchSong(String music)
     {
-        // Get song to play
-        //song2Play = trackList.GetSong(musicPlayedName);
+        // Update status
+        trackList.GetSong(music).SetHasBeenPlayed(true);
 
         // Create MediaPlayer object (if an instance is running kill it)
         if (mediaPlayer != null) {
@@ -172,16 +195,19 @@ public class Launcher extends Activity
             mediaPlayer.release();
             mediaPlayer = null;
         }
-        mediaPlayer = MediaPlayer.create(this, Uri.parse(trackList.GetSong(musicPlayedName).GetPath()));
+        mediaPlayer = MediaPlayer.create(this, Uri.parse(trackList.GetSong(music).GetPath()));
 
         // Listener for notifying when a song ends
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer)
             {
-               Toast.makeText(getApplicationContext(),
-                       "OK", Toast.LENGTH_LONG)
-                       .show();
+                idx++;
+                if (repeat) idx --;
+                if (idx > trackList.GetLibrary().size()-1)
+                    idx=0;
+
+                LaunchSong(trackList.GetLibrary().get(idx).GetName());
             }
         });
 
@@ -189,17 +215,17 @@ public class Launcher extends Activity
         StartPlayProgressUpdater();
 
         // Set song name
-        textViewSong.setText(trackList.GetSong(musicPlayedName).GetName());
+        textViewSong.setText(trackList.GetSong(music).GetName());
 
         // Set artist name
-        textViewArtist.setText(trackList.GetSong(musicPlayedName).GetArtist());
+        textViewArtist.setText(trackList.GetSong(music).GetArtist());
 
         // Set album name
-        textViewAlbum.setText(trackList.GetSong(musicPlayedName).GetAlbum());
+        textViewAlbum.setText(trackList.GetSong(music).GetAlbum());
 
         // Set image art
         MediaMetadataRetriever MMR= new MediaMetadataRetriever();
-        MMR.setDataSource(trackList.GetSong(musicPlayedName).GetPath());
+        MMR.setDataSource(trackList.GetSong(music).GetPath());
         byte[] art;
         art = MMR.getEmbeddedPicture();
         Bitmap songImage = BitmapFactory.decodeByteArray(art, 0, art.length);
