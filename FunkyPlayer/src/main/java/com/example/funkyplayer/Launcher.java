@@ -30,6 +30,7 @@ public class Launcher extends Activity
     private final Handler handler = new Handler();
 
     private Library trackList;
+    private Library trackListBackup;
     private String music2Play;
     private static MediaPlayer mediaPlayer;
     private Boolean random;
@@ -61,6 +62,10 @@ public class Launcher extends Activity
         trackList = (Library)intent.getSerializableExtra("library");
         Collections.sort(trackList.GetSongsName());
         music2Play = intent.getStringExtra("song_selected");
+
+        // Save trackList
+        trackListBackup = new Library();
+        trackListBackup.CopyFrom(trackList);
 
         // Set references to widgets
         buttonPlayPause = (ImageButton) findViewById(R.id.button_play_pause);
@@ -149,12 +154,24 @@ public class Launcher extends Activity
                     random = true;
                     buttonRandom.setImageResource(R.drawable.random_enabled);
                     Toast.makeText(getApplicationContext(),"Random mode enabled", Toast.LENGTH_LONG).show();
+
+                    // Shuffle the tracklist
+                    Collections.shuffle(trackList.GetLibrary());
+
+                    // update the index
+                    idx = trackList.IndexOfSong(trackList.GetSong(music2Play));
                 }
                 else
                 {
                     random = false;
                     buttonRandom.setImageResource(R.drawable.random_disabled);
                     Toast.makeText(getApplicationContext(),"Random mode disabled", Toast.LENGTH_LONG).show();
+
+                    // Rollback the tracklist
+                    trackList.CopyFrom(trackListBackup);
+
+                    // update the index
+                    idx = trackList.IndexOfSong(trackList.GetSong(music2Play));
                 }
             }
         });
@@ -205,9 +222,6 @@ public class Launcher extends Activity
     @TargetApi(Build.VERSION_CODES.GINGERBREAD_MR1)
     private void LaunchSong(String music)
     {
-        // Update status
-        trackList.GetSong(music).SetHasBeenPlayed(true);
-
         // Create MediaPlayer object (if an instance is running kill it)
         if (mediaPlayer != null) {
             mediaPlayer.reset();

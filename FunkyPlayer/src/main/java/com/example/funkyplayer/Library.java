@@ -139,7 +139,7 @@ public class Library implements Serializable
             songsName.add(new String(element.GetName()));
         }
         //Collections.sort(songsName);
-        songsName.add(0, new String("~ SHUFFLE ~"));
+        //songsName.add(0, new String("~ SHUFFLE ~"));
 
         return songsName;
     }
@@ -150,20 +150,10 @@ public class Library implements Serializable
 
     public Song GetSong(String songName)
     {
-        //Song song2Play = new Song();
-//
-        //for(Song element : library)
-        //{
-        //    if(element.GetName().equalsIgnoreCase(songName))
-        //        song2Play.CopyFrom(element);
-        //}
-//
-        //return song2Play;
-
         int i = 0;
         boolean loop = true;
 
-        while(i<(library.size()-1) && loop)
+        while(i<(library.size()) && loop)
         {
             if(library.get(i).GetName().equalsIgnoreCase(songName))
                 loop = false;
@@ -179,7 +169,7 @@ public class Library implements Serializable
         int i = 0;
         boolean loop = true;
 
-        while(i<(library.size()-1) && loop)
+        while(i<(library.size()) && loop)
         {
             if(library.get(i).GetName().equalsIgnoreCase(song.GetName()))
                 loop = false;
@@ -195,5 +185,16 @@ public class Library implements Serializable
 
     public ArrayList<Song> GetLibrary(){return library;}
     public void SetLibrary(ArrayList<Song> list){library = list;}
+
+    public void CopyFrom(Library lib)
+    {
+        this.library.clear();
+
+        for(int i =0; i< lib.GetLibrary().size(); i++)
+        {
+            this.library.add(new Song());
+            this.library.get(i).CopyFrom(lib.GetLibrary().get(i));
+        }
+    }
 
 }
