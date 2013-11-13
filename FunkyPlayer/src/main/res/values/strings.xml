@@ -4,4 +4,5 @@
     <string name="browse_artists">Browse by Artists</string>
     <string name="browse_albums">Browse by Albums</string>
     <string name="browse_songs">All Songs</string>
+    <string name="shake_shuffle_mode">Shake for shuffle Mode ?</string>
 </resources>

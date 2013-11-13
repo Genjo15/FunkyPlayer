@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class MainMenu extends Activity
         final Button byArtistsButton = (Button)findViewById(R.id.browse_artists);
         final Button byAlbumsButton = (Button)findViewById(R.id.browse_albums);
         final Button bySongsButton = (Button)findViewById(R.id.browse_songs);
+        final CheckBox shakeForShuffleCheckBox = (CheckBox)findViewById(R.id.shake_checkbox);
 
 
         /****************************************************\
@@ -45,6 +47,7 @@ public class MainMenu extends Activity
                 // Create and prepare intent
                 Intent intent = new Intent(MainMenu.this, ByArtists.class);
                 intent.putExtras(bundle);
+                intent.putExtra("shake", shakeForShuffleCheckBox.isChecked());
 
                 // Switch activity
                 startActivity(intent);
@@ -67,6 +70,7 @@ public class MainMenu extends Activity
                 // Create and prepare intent
                 Intent intent = new Intent(MainMenu.this, ByAlbums.class);
                 intent.putExtras(bundle);
+                intent.putExtra("shake", shakeForShuffleCheckBox.isChecked());
 
                 // Switch activity
                 startActivity(intent);
@@ -89,6 +93,7 @@ public class MainMenu extends Activity
                 // Create and prepare intent
                 Intent intent = new Intent(MainMenu.this, BySongs.class);
                 intent.putExtras(bundle);
+                intent.putExtra("shake", shakeForShuffleCheckBox.isChecked());
 
                 // Switch activity
                 startActivity(intent);

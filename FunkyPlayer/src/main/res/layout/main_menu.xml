@@ -16,7 +16,7 @@
 
     <Button
         android:id="@+id/browse_artists"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
@@ -24,18 +24,26 @@
 
     <Button
         android:id="@+id/browse_albums"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="1dp"
         android:text="@string/browse_albums" />
 
     <Button
         android:id="@+id/browse_songs"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="1dp"
         android:text="@string/browse_songs" />
+
+    <CheckBox
+        android:id="@+id/shake_checkbox"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/shake_shuffle_mode"/>
 
 </LinearLayout>

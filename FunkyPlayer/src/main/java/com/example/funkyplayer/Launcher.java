@@ -2,9 +2,12 @@ package com.example.funkyplayer;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -35,6 +38,7 @@ public class Launcher extends Activity
     private static MediaPlayer mediaPlayer;
     private Boolean random;
     private Boolean repeat;
+    private Boolean shakeForShuffleMode;
     private int idx;
 
     private ImageButton buttonPlayPause;
@@ -47,6 +51,11 @@ public class Launcher extends Activity
     private TextView textViewArtist;
     private TextView textViewAlbum;
     private SeekBar seekbar;
+
+    // For shake detection
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private ShakeDetector mShakeDetector;
 
     public void onCreate(Bundle savedInstanceState)
     {
@@ -62,6 +71,7 @@ public class Launcher extends Activity
         trackList = (Library)intent.getSerializableExtra("library");
         Collections.sort(trackList.GetSongsName());
         music2Play = intent.getStringExtra("song_selected");
+        shakeForShuffleMode = intent.getBooleanExtra("shake", false);
 
         // Save trackList
         trackListBackup = new Library();
@@ -123,6 +133,8 @@ public class Launcher extends Activity
                 LaunchSong(trackList.GetLibrary().get(idx).GetName());
             }
         });
+
+
 
         /**********************************************\
          * Set event handler for previous song button *
@@ -213,6 +225,60 @@ public class Launcher extends Activity
                 return false;
             }
         });
+
+        /*********************************\
+         * Shake Detector Initialization *
+        \*********************************/
+
+
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccelerometer = mSensorManager
+                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mShakeDetector = new ShakeDetector();
+
+        if (shakeForShuffleMode)
+        {
+            mShakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
+
+                @Override
+                public void onShake(int count) {
+                    /*
+                     * The following method, "handleShakeEvent(count):" is a stub //
+                     * method you would use to setup whatever you want done once the
+                     * device has been shook.
+                     */
+                    handleShakeEvent(count);
+                }
+            });
+        }
+    }
+
+    /****************\
+     * Shuffle Song *
+    \****************/
+
+    private void handleShakeEvent(int count)
+    {
+        idx++;
+        if (repeat) idx --;
+        if (idx > trackList.GetLibrary().size()-1)
+            idx=0;
+
+        LaunchSong(trackList.GetLibrary().get(idx).GetName());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Add the following line to register the Session Manager Listener onResume
+        mSensorManager.registerListener(mShakeDetector, mAccelerometer,	SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    public void onPause() {
+        // Add the following line to unregister the Sensor Manager onPause
+        mSensorManager.unregisterListener(mShakeDetector);
+        super.onPause();
     }
 
     /***************\

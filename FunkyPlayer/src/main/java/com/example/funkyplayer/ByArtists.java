@@ -16,6 +16,7 @@ public class ByArtists extends Activity
 {
     private ListView listViewByArtists;
     private Library trackList;
+    private Boolean shakeForShuffleMode;
 
     public void onCreate(Bundle savedInstanceState)
     {
@@ -23,7 +24,9 @@ public class ByArtists extends Activity
         setContentView(R.layout.list_view);
 
         // Get Library from intent
-        trackList = (Library)getIntent().getSerializableExtra("library");
+        Intent intent = getIntent();
+        trackList = (Library)intent.getSerializableExtra("library");
+        shakeForShuffleMode = (Boolean)intent.getBooleanExtra("shake", false);
 
         // Set references to listView
         listViewByArtists = (ListView)findViewById(R.id.listview);
@@ -52,6 +55,7 @@ public class ByArtists extends Activity
                 // Create and prepare intent
                 Intent intent = new Intent(ByArtists.this, ByAlbums.class);
                 intent.putExtras(bundle);
+                intent.putExtra("shake", shakeForShuffleMode);
 
                 // Switch activity
                 startActivity(intent);
