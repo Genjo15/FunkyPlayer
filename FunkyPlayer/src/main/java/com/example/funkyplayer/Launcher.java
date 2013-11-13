@@ -38,6 +38,7 @@ public class Launcher extends Activity
 
     private ImageButton buttonPlayPause;
     private ImageButton buttonNextSong;
+    private ImageButton buttonPreviousSong;
     private ImageButton buttonRandom;
     private ImageButton buttonRepeat;
     private ImageView songCoverArt;
@@ -64,6 +65,7 @@ public class Launcher extends Activity
         // Set references to widgets
         buttonPlayPause = (ImageButton) findViewById(R.id.button_play_pause);
         buttonNextSong = (ImageButton) findViewById(R.id.button_next);
+        buttonPreviousSong = (ImageButton) findViewById(R.id.button_previous);
         buttonRandom = (ImageButton)findViewById(R.id.button_random);
         buttonRepeat = (ImageButton)findViewById(R.id.button_repeat);
         songCoverArt = (ImageView) findViewById(R.id.album_art);
@@ -116,6 +118,23 @@ public class Launcher extends Activity
                 LaunchSong(trackList.GetLibrary().get(idx).GetName());
             }
         });
+
+        /**********************************************\
+         * Set event handler for previous song button *
+        \**********************************************/
+
+        buttonPreviousSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                idx--;
+                if (idx == -1)
+                    idx=trackList.GetLibrary().size()-1;
+
+                LaunchSong(trackList.GetLibrary().get(idx).GetName());
+            }
+        });
+
 
         /***************************************\
          * Set event handler for random button *
@@ -256,7 +275,7 @@ public class Launcher extends Activity
         else
         {
             mediaPlayer.pause();
-            seekbar.setProgress(0);
+            //seekbar.setProgress(0);
         }
     }
 }
